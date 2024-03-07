@@ -9,7 +9,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 @RestController
-@RequestMapping("/captcha")
+@RequestMapping("/captcha1111")
 public class CaptchaController {
 
     private final String clientId = "htHEDCZDbqVdUcr2Jjty"; // 애플리케이션 클라이언트 아이디값
