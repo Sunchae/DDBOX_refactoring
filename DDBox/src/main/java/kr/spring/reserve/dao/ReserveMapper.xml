@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.spring.reserve.dao.ReserveMapper">
+	
+	
+	
+	<!-- 극장 목록 -->
+	
+	<select id="selectSeoulList" parameterType="map" resultType="screenVO">
+		SELECT substr(scr_name,4,10) scr_name,scr_num
+		FROM screen
+		WHERE scr_do= '서울시'
+	</select>
+	
+	<!-- 시간 목록 -->
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

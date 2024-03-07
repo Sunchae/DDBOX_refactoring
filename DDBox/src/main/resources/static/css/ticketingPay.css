@@ -1,0 +1,522 @@
+h2{
+    width: 90%;
+    border-bottom: 1px solid black;
+    padding-bottom: 10px;
+}
+.left-container{ 
+    float: left;
+    width: 60%;
+    position: relative;
+    height: 400px;
+}
+.right-container{
+    float: right;
+    width: 20%;
+    margin: auto;
+    height: 400px;
+    margin-right: 10%;
+    position: relative;
+    background-color: rgb(43, 41, 41);
+    border-radius: 10px;
+}
+.sale-ticket{
+    margin: 10px;
+}
+.sale-ticket>span{
+    width: 100%;
+    height: 40px;
+    display: block;
+    text-align: left;
+    justify-content: center;
+    font-weight: bold;
+    padding-left: 20px;
+    padding-top: 10px;
+    font-size: 13px;
+
+}
+.pay-kakao{
+    margin-top: 30px;
+}
+.text-wrap{
+    display: flex;
+    background-color: #f0f3f3d8;
+    width: 90%;
+
+}
+#pay-kakao-id{
+    background-image: url(/resources/images/btn/mypay.png);
+    background-repeat: no-repeat;
+    background-position: left;
+    background-size: 80px 30px;
+    width: 20%;
+    height: 20px;
+    border: 1px solid #f0f3f3d8;
+    background-color: #f0f3f3d8;
+    margin-top: 5px;
+    display: flex;
+}
+.text-event{
+    width: 50%;
+    float: right;
+    margin-right: 280px;
+    height: 30px;
+}
+.text-event>p{
+    color: black;
+    font-size: 10px;
+    margin-top: 10px;
+    font-weight: 600;
+}
+.pay-wrap{
+    width: 80%;
+    height: 60px;
+    margin: 20px;
+    padding-top: 20px;
+    border: 1px solid #f0f3f3d8;
+
+}
+.pay-story{
+    border: 1px solid #f0f3f3d8;
+}
+.pay-story li{
+    list-style-type: square;
+    font-size: 11px;
+    font-weight: 400;
+}
+#kakao-pay-radiobox{
+    padding: 10px;
+    margin-left: 10px;
+    font-weight: 300;
+}
+.title-name{
+    width: 100%;
+    height: 110px;
+    padding: 10px;
+}
+.count-age{
+    width: 12px;
+}
+.title-text{
+    color: white;
+    display: inline;
+    font-size: 13px;
+}
+.screen-system,.screen-location,.screen-day{
+    color: rgb(207, 205, 205);
+    font-size: 12px;
+    margin-left: 10px;
+    height: 5px;
+}
+.screen-time{
+    float: right;
+    color: rgb(207, 205, 205);
+    font-size: 10px;
+    height: 5px;
+    padding-right: 8%;
+}
+.fa-clock{
+    float: left;
+}
+.kind-age,.total,.discount-total{
+    background-color: rgb(78, 78, 78);
+    font-size: 10px;
+    width: 80%;
+    margin-left: 10%;
+    height: 30px;
+}
+.name,.discount-title,.use-point,.final-title{
+    color: rgb(233, 230, 230);
+    display: inline;
+    padding-left: 5%;
+}
+.pay,.discount-pay,.point-discount,.final-total{
+    color: rgb(207, 205, 205);
+    text-align: right;
+    padding-right: 5%;
+}
+.total-title,.way-pay-title{
+    color: white;
+    display: inline;
+    padding-left: 5%;
+}
+.total-pay,.way-pay-content{
+    color: white;
+    text-align: right;
+    padding-right: 5%;
+}
+.fa-minus-circle{
+    width: 20px;
+    height: 20px;
+    color: white;
+    background-position: center;
+    background-repeat: no-repeat;
+    margin-left: 45%;
+}
+.discount-content{
+    width: 80%;
+    font-size: 10px;
+    margin-left: 10%;
+    height: 60px;
+    border-radius: 3px;
+}
+.final-pay{
+    width: 80%;
+    height: 30px;
+    font-size: 10px;
+    margin-left: 10%;
+}
+.way-pay{
+    border-top: 1px solid gray;
+    width: 80%;
+    height: 60px;
+    font-size: 10px;
+    margin-left: 10%;
+}
+.btn-final>button,.btn-final>a{
+    width: 50%;
+    height: 30px;
+    display: inline-block;
+}
+a.btn-pre{
+    text-decoration-line : none;
+    text-align: center;
+    align-items: center;
+}
+a.btn-pre:hover{
+    text-decoration : none;
+    text-align: center;
+    align-items: center;
+    color: white;
+}
+.btn-pre{
+    float: left;
+    border-radius: 0 0 0 10px;
+    background-color: rgb(61, 61, 61);
+    color: white;
+    border: 1px solid rgb(61, 61, 61);
+}
+.btn-pay{
+    border-radius: 0 0 10px 0;
+    background-color: #028487;
+    color: white;
+    border: 1px solid #028487;
+}
+.btn-modal-show{
+    border: 1px solid rgb(190, 190, 190);
+    width: 30%;
+    height: 40px;
+    background-color: white;
+    margin-top: 12px;
+    font-size: 10px;
+}
+#point-modal{
+    background-color:rgba(0, 0, 0, 0.8); 
+    justify-content:center; 
+    align-items:center;     
+    position:absolute;      
+    top:0;
+    left:0;
+    right:0;
+    bottom:0;             
+    display:none; 
+}
+.point-modal{
+    width:400px;            
+    border-radius:5px;       
+    overflow:hidden;        
+    background-color:#743cf7; 
+    box-shadow: 5px 10px 10px 1px rgba(0,0,0,.1); 
+    height: 400px;
+    z-index: 60;
+}
+.point-modal-header{
+  width:100%;
+  height:30px;  
+  display:flex; 
+  align-items:left;
+  justify-content:left;
+  color: white;
+  font-size: 5px;
+  padding-left: 10px;
+}
+.tit{
+    font-weight: 500;
+    font-style: normal;
+}
+.point-modal-body{
+    width: 400px;
+    height: 400px;
+    padding: 6px;
+    background-color:#ffffff;
+    word-break:break-word; 
+    overflow-y:auto;  
+}
+.dot-list{
+    font-size: 10px;
+    font-weight: 500;
+}
+.usable-point{
+    justify-content:center;            
+    text-align: center;
+    margin-left: auto;
+    background-color: rgb(235, 235, 235);
+    height: 30px;
+    font-size: 11px;
+    color: #844fff;
+}
+em{
+    margin-left: 10px;
+    font-size: 13px;
+    font-style: normal;
+}
+.button-list{
+    width:100%;
+    height:30px;
+    float: center;
+    margin: auto;
+}
+.btn-discount-pay{     
+    text-align: center;  
+    width:50px;                    
+    height:30px;
+    margin: auto;                                              
+    color:#ffffff;                 
+    cursor:pointer;  
+    border: 1px solid #844fff;       
+}
+#btn-point-close{
+    color: #844fff;
+    background-color: white;
+}
+#btn-point-submit{
+    background-color: #844fff;
+    color: white;
+}
+
+.total-point{
+    width: 100%;
+    height: 230px;
+    border: 1px solid rgb(173, 172, 172);
+    margin: 3px;
+}
+.point-wrap{
+    width: 100%;
+    height: 30%;
+    display: flex;
+
+}
+.text-right{
+    float: right;
+}
+p{
+    color: #3ba7ff;
+}
+.block{
+    width: 70%;
+    padding-top: 10px;
+    margin: 10px;
+    float: left;
+    height: 60%;
+    border: 1px solid rgb(173, 172, 172);
+    background-color: rgb(235, 235, 235);
+}
+#coupon-modal{
+    background-color:rgba(0, 0, 0, 0.8); 
+    justify-content:center; 
+    align-items:center;     
+    position:absolute;      
+    top:0;
+    left:0;
+    right:0;
+    bottom:0;             
+    display:none; 
+}
+.coupon-modal{
+    width:400px;            
+    border-radius:5px;       
+    overflow:hidden;        
+    height: 430px;
+    z-index: 60;
+}
+.coupon-modal-header{
+  width:100%;
+  height:30px;  
+  display:flex; 
+  align-items:left;
+  justify-content:left;
+  color: white;
+  font-size: 5px;
+  padding-left: 10px;
+  background-color: #743cf7;
+}
+.coupon-modal-body{
+    width: 400px;
+    height: 400px;
+    padding: 6px;
+    background-color:#fdfdfd;
+    word-break:break-word; 
+    overflow-y:auto;  
+}
+.coupon-modal-body>ul{
+    list-style: none;
+}
+
+.usable-coupon{
+    border: 1px solid rgba(243, 241, 241, 0.473);
+    display: flex;
+    margin: 10px;
+    background-color: rgba(243, 241, 241, 0.8);
+}
+.usable-coupon>p{
+    text-align: center;
+    justify-content:center;
+    margin: 10px;
+    font-size: 8px;
+    word-break:break-word; 
+    color: rgb(37, 37, 37);
+}
+.input-text{
+    float: right;
+    height: 25px;
+    margin: 5px;
+    justify-content:center;
+    border: 1px solid rgba(187, 186, 186, 0.473);
+}
+.btn-submit{
+    float: right;
+    height: 25px;
+    width: 70px;
+    text-align: center;
+    font-size: 12px;
+    justify-content:center;
+    margin: auto;
+    display: block;
+}
+.coupon-title{
+    width: 100%;
+    height: 30px;
+    border-top: 1px solid rgba(155, 155, 155, 0.808);
+    border-bottom: rgba(243, 241, 241, 0.425);
+    display: flex;
+    background-color: rgba(243, 241, 241, 0.8);
+}
+.coupon-name{
+    height: 100%;
+    width: 70%;
+    float: left;
+}
+.coupon-date{
+    height: 100%;
+    width: 20%;
+   
+}
+.coupon-name>p,.coupon-date>p,.coupon-use>p{
+    color: rgb(37, 37, 37);
+    margin: 5px;
+    text-align: center;
+    justify-content: center;
+}
+.coupon-use{
+    height: 100%;
+    width: 10%;
+    text-align: center;
+    justify-content: center;
+    font-size: 8px;
+}
+.coupon-content{
+    height: 80%;
+    overflow: auto;
+}
+#coupon-list{
+    width: 70%;
+    height: 25px;
+    border-bottom: rgba(243, 241, 241, 0.425);
+    float: left;
+    text-align: center;
+}
+#coupon-date{
+    width: 20%;
+    height: 25px;
+    border-bottom: rgba(243, 241, 241, 0.425);
+    float: left;
+    text-align: center;
+    font-size: 5px;
+    padding: 5px;
+}
+#coupon-use-btn{
+    width: 10%;
+    border-bottom: rgba(243, 241, 241, 0.425);
+    height: 25px;
+    float: left;
+}
+#button-use{
+    display: block;
+    background-color: #743cf7;
+    font-size: 10px;
+    color: white;
+    height: 23px;
+    border: 1px solid #743cf7;
+    word-break:break-word; 
+}
+#btn-coupon-close{
+    color: #844fff;
+    background-color: white;
+}
+#btn-coupon-submit{
+    background-color: #844fff;
+    color: white;
+}
+#btn-vipcoupon-close{
+    color: #844fff;
+    background-color: white;
+}
+#btn-vipcoupon-submit{
+    background-color: #844fff;
+    color: white;
+}
+#vipcoupon-modal{
+    background-color:rgba(0, 0, 0, 0.8); 
+    justify-content:center; 
+    align-items:center;     
+    position:absolute;      
+    top:0;
+    left:0;
+    right:0;
+    bottom:0;             
+    display:none;
+     
+}
+.vipcoupon-modal{
+    width:400px;            
+    border-radius:5px;       
+    overflow:hidden;        
+    height: 430px;
+    z-index: 60;
+}
+.vipcoupon-modal-header{
+  width:100%;
+  height:30px;  
+  display:flex; 
+  align-items:left;
+  justify-content:left;
+  color: white;
+  font-size: 5px;
+  padding-left: 10px;
+  background-color: #743cf7;
+}
+.vipcoupon-modal-body{
+    width: 400px;
+    height: 400px;
+    padding: 6px;
+    background-color:#fdfdfd;
+    word-break:break-word; 
+    overflow-y:auto;  
+}
+.vipcoupon-content{
+    width: 100%;
+    height: 250px;
+}
+button.btn-block{
+	width: 100%;
+	height:100%;
+}

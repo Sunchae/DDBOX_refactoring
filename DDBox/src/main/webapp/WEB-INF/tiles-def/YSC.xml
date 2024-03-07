@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE tiles-definitions PUBLIC
+       "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN"
+       "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
+
+<tiles-definitions>
+    <definition name="memberRegisterCheck"  extends="main">
+    	<put-attribute name="title" value="회원가입여부 확인"/>
+    	<put-attribute name="body"
+    	               value="/WEB-INF/views/member/memberRegisterCheck.jsp"/>                                           
+    </definition>
+    
+    <definition name="memberRegister"  extends="main">
+    	<put-attribute name="title" value="회원가입"/>
+    	<put-attribute name="body"
+    	               value="/WEB-INF/views/member/memberRegister.jsp"/>                                           
+    </definition>
+    <definition name="memberUpdate"  extends="main">
+    	<put-attribute name="title" value="회원정보 수정"/>
+    	<put-attribute name="body"
+    	               value="/WEB-INF/views/member/memberUpdate.jsp"/>                                           
+    </definition>
+    <definition name="memberLogin"  extends="main">
+    	<put-attribute name="title" value="회원로그인"/>
+    	<put-attribute name="body"
+    	               value="/WEB-INF/views/member/memberLogin.jsp"/>                                           
+    </definition>
+    
+    <!-- myPage -->
+    <definition name="myPage" 
+           template="/WEB-INF/views/template/layout_mypage.jsp">
+    	<put-attribute name="title" value="MyPage"/>
+    	<put-attribute name="header"
+    	               value="/WEB-INF/views/template/DDBox_navbar.jsp"/>
+    	<put-attribute name="summary"
+    	               value="/WEB-INF/views/member/UserSummary.jsp"/>
+    	<put-attribute name="nav"
+    	               value="/WEB-INF/views/template/DDBox_sidebar.jsp"/>               
+    	<put-attribute name="body"
+    	               value="/WEB-INF/views/member/MypageMain.jsp"/>
+    	<put-attribute name="footer"
+    	               value="/WEB-INF/views/template/footer.jsp"/>                                             
+    </definition>
+    
+    <definition name="myPageTicket" extends="myPage">
+    	<put-attribute name="title" value="MyPageTicket"/>
+    	<put-attribute name="body"
+    	               value="/WEB-INF/views/member/MypageTicket.jsp"/>
+    </definition>
+    <definition name="myPageCoupon" extends="myPage">
+    	<put-attribute name="title" value="MyPageCoupon"/>
+    	<put-attribute name="body"
+    	               value="/WEB-INF/views/member/MypageCoupon.jsp"/>
+    </definition>
+    <definition name="myPagePoint" extends="myPage">
+    	<put-attribute name="title" value="MyPagePoint"/>
+    	<put-attribute name="body"
+    	               value="/WEB-INF/views/member/MypagePoint.jsp"/>
+    </definition>
+    <definition name="myPageEvent" extends="myPage">
+    	<put-attribute name="title" value="MyPageEvent"/>
+    	<put-attribute name="body"
+    	               value="/WEB-INF/views/member/MypageEvent.jsp"/>
+    </definition>
+    <definition name="myPageGiftshop" extends="myPage">
+    	<put-attribute name="title" value="MyPageGiftshop"/>
+    	<put-attribute name="body"
+    	               value="/WEB-INF/views/store/storePayMain.jsp"/>
+    </definition>
+    <definition name="myPageInfo" extends="myPage">
+    	<put-attribute name="title" value="MyPageInfo"/>
+    	<put-attribute name="body"
+    	               value="/WEB-INF/views/member/MypageInfo.jsp"/>
+    </definition>
+    <definition name="myPageProfile" extends="myPage">
+    	<put-attribute name="title" value="MyPageProfile"/>
+    	<put-attribute name="body"
+    	               value="/WEB-INF/views/member/MypageProfile.jsp"/>
+    </definition>
+    
+    <definition name="myPageFAQ" extends="myPage">
+    	<put-attribute name="title" value="MyPageFAQ"/>
+    	<put-attribute name="body"
+    	               value="/WEB-INF/views/member/MypageFAQ.jsp"/>
+    </definition>
+    <definition name="myPageEmail" extends="myPage">
+    	<put-attribute name="title" value="MyPageEmail"/>
+    	<put-attribute name="body"
+    	               value="/WEB-INF/views/member/MypageFAQ.jsp"/>
+    </definition>
+    <definition name="myPageRental" extends="myPage">
+    	<put-attribute name="title" value="MyPageRental"/>
+    	<put-attribute name="body"
+    	               value="/WEB-INF/views/member/MypageRental.jsp"/>
+    </definition>
+    <definition name="withdrawForm" extends="myPage">
+    	<put-attribute name="title" value="withdrawForm"/>
+    	<put-attribute name="body"
+    	               value="/WEB-INF/views/member/withdrawForm.jsp"/>
+    </definition>
+    
+    <!-- 영화 페이지 -->
+     <definition name="movie" 
+           template="/WEB-INF/views/template/DDBox_layout.jsp">
+    	<put-attribute name="title" value="SpringPage"/>
+    	<put-attribute name="header"
+    	               value="/WEB-INF/views/template/DDBox_navbar.jsp"/> 
+    	<put-attribute name="body"
+    	               value="/WEB-INF/views/main/main.jsp"/>
+    	<put-attribute name="footer"
+    	               value="/WEB-INF/views/template/footer.jsp"/>                                             
+    </definition>
+    
+    
+    
+  	 <definition name="movieMain"  extends="main">
+    	<put-attribute name="title" value="영화 메인"/>
+    	<put-attribute name="body"
+    	               value="/WEB-INF/views/movie/movieMain.jsp"/>                                           
+    </definition>
+  	 <definition name="movieDetail"  extends="main">
+    	<put-attribute name="title" value="영화 상세페이지"/>
+    	<put-attribute name="body"
+    	               value="/WEB-INF/views/movie/movieDetail.jsp"/>                                           
+    </definition>
+    
+</tiles-definitions>
+
+
+
+
+

@@ -1,0 +1,110 @@
+@charset "UTF-8";
+
+.movie-detail-page {
+    font-family: Arial, sans-serif;
+}
+
+
+
+.movie-titles h1 {
+    margin: 0;
+    color: #333;
+}
+
+.movie-titles h2 {
+    margin: 5px 0;
+    color: #666;
+}
+
+.like-button, .booking-button {
+    background-color: #4B3891;
+    color: white;
+    border: none;
+    cursor: pointer;
+    padding: 10px 20px;
+    margin-top: 10px;
+}
+
+.movie-poster {
+    width: 250px;
+    height: 400px;
+    margin-bottom: 10px;
+}
+
+.movie-info-area, .audience-stats-area, .user-reviews-area {
+    margin-top: 20px;
+    margin-bottom: 40px;
+}
+
+.more-button {
+    background: none;
+    border: none;
+    color: #007bff;
+    cursor: pointer;
+}
+
+.additional-info p {
+    margin: 5px 0;
+}
+
+
+
+
+.movie-content-area {
+    position: relative;
+    height: 500px;
+    width: 100%;
+    z-index: 1;
+    display: flex;
+    justify-content: space-between;
+    padding: 20px;
+    color: white;
+    background: rgba(51, 51, 51, 0.85); /* 짙은 회색 배경에 투명도 적용 */
+    margin-bottom: 40px;
+}
+
+
+.movie-texts {
+    margin-left: 20px;
+    color: white;
+}
+
+.movie-booking-area {
+    margin-right: 20px;
+    text-align: center;
+}
+
+
+.heart-icon {
+    width: 24px; /* 아이콘의 너비 */
+    height: 24px; /* 아이콘의 높이 */
+    margin-right: 8px; /* 텍스트와의 간격 */
+    vertical-align: middle; /* 버튼 내에서 중앙 정렬 */
+}
+.heart-icon:hover {
+    opacity: 0.8; /* 마우스를 올렸을 때 아이콘의 투명도 변경 */
+}
+
+
+.summary-test {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2; 
+    overflow: hidden;
+}
+
+.charts-container {
+    display: flex;
+    justify-content: space-around; /* 차트 사이의 간격을 균등하게 조정 */
+    align-items: center; /* 세로축 중앙 정렬 */
+    flex-wrap: wrap; /* 화면 크기에 따라 아이템이 다음 줄로 넘어갈 수 있도록 설정 */
+    margin: 20px 40px; /* 상단과 하단 여백 추가 */
+}
+
+.chart {
+    flex: 1; /* 차트가 가용 공간을 균등하게 차지하도록 설정 */
+    max-width: 45%; /* 차트의 최대 너비를 제한 */
+    min-width: 300px; /* 차트의 최소 너비를 설정 */
+    height: 400px; /* 차트의 높이 설정 */
+}
+  

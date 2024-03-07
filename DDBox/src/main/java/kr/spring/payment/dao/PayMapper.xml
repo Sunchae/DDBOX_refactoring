@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.spring.payment.dao.PayMapper">
+	<!-- pay 등록 -->
+	<insert id="insertPay" parameterType="payVO">
+		INSERT INTO pay(
+			pay_id,
+			pay_status,
+			store_title,
+			total_price,
+			pay_date,
+			order_quantity,
+			store_num,
+			mem_num)
+		VALUES(
+			pay_seq.nextval,
+			1,
+			#{store_title},
+			#{total_price},
+			SYSDATE,
+			#{order_quantity},
+			#{store_num},
+			#{mem_num})
+	</insert>
+	
+	<select id="selectList" parameterType="map" resultType="payVO">
+		SELECT *
+		FROM(
+			SELECT
+				a.*,
+				rownum rnum
+			FROM(
+				SELECT
+					pay_id,
+					store_num, 
+					store_title, 
+					total_price, 
+					pay_date
+				FROM 
+					pay 
+				WHERE 
+					mem_num=#{mem_num}
+				ORDER BY pay_id DESC
+			)a
+		)
+		
+		<![CDATA[
+		WHERE rnum >= #{start} AND rnum <= #{end}
+		]]>
+	</select>
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.spring.question.dao.VipMapper">
+	<!-- 글등록 -->
+	<insert id="insertVip" parameterType="vipVO">
+		INSERT INTO vip_faq(
+				vip_num,
+				mem_num,
+				vip_title,
+				vip_content)
+			VALUES (
+				vip_seq.nextval,
+				#{mem_num},
+				#{vip_title},
+				#{vip_content})
+	</insert>
+	
+	<!-- 총개수/검색개수 -->
+	<select id="selectRowCount" parameterType="map" resultType="integer">
+		SELECT
+			COUNT(*)
+		FROM vip_faq JOIN member USING (mem_num)
+	</select>
+	
+	<!-- 전체목록/검색목록 -->
+	<select id="selectList" parameterType="map" resultType="vipVO">
+		SELECT
+		  *
+		FROM (SELECT
+				a.*,
+				rownum rnum
+			  FROM (SELECT
+					  vip_num,
+					  vip_title
+				    FROM vip_faq)a)
+		<![CDATA[
+		WHERE rnum >= #{start} AND rnum <= #{end}
+		]]>
+	</select>
+	
+	<!-- 글상세 -->
+	<select id="selectVip" parameterType="integer">
+		SELECT
+			*
+		FROM vip_faq
+		JOIN member USING(mem_num)
+		<!-- LEFT OUTER JOIN member_detail USING(mem_num) -->
+		WHERE vip_num=#{vip_num}
+	</select>
+	
+	
+	<!-- 글수정 -->
+	<update id="updateVip" parameterType="vipVO">
+		UPDATE vip_faq SET
+			vip_title=#{vip_title},
+			vip_content=#{vip_content}
+		WHERE vip_num=#{vip_num}
+	</update>
+	
+</mapper>
+
+

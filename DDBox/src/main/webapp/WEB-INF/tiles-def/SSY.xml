@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE tiles-definitions PUBLIC
+       "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN"
+       "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
+
+<tiles-definitions>
+	<definition name="SSY" extends="main">
+    	<put-attribute name="title" value="회원가입"/>
+    	<put-attribute name="body"
+    	               value="/WEB-INF/views/member/memberRegister.jsp"/>                                           
+    </definition>
+    <definition name="eventMain" template="/WEB-INF/views/template/layout_event.jsp">
+    	<put-attribute name="title" value="이벤트 매인"/>
+    	<put-attribute name="header" value="/WEB-INF/views/template/DDBox_navbar.jsp"/>
+    	<put-attribute name="nav" value="/WEB-INF/views/template/event_nav.jsp"/>
+    	<put-attribute name="body" value="/WEB-INF/views/event/eventMain.jsp"/>
+    	<put-attribute name="footer" value="/WEB-INF/views/template/footer.jsp"/>
+    </definition>
+    <!-- 수정 -->
+    <definition name="myPageEvent" template="/WEB-INF/views/template/layout_mypage_event.jsp">
+    	<put-attribute name="title" value="마이페이지 이벤트 매인"/>
+    	<put-attribute name="header" value="/WEB-INF/views/template/DDBox_navbar.jsp"/>
+    	<put-attribute name="nav" value="/WEB-INF/views/template/DDBox_sidebar.jsp"/>
+    	<put-attribute name="nav2" value="/WEB-INF/views/template/mypage_event_nav.jsp"/>
+    	<put-attribute name="body" value="/WEB-INF/views/member/MypageEvent.jsp"/>
+    	<put-attribute name="footer" value="/WEB-INF/views/template/footer.jsp"/>
+    </definition>
+    <!-- 마이페이지 응모이벤트 리스트 -->
+    <definition name="memberEntryList" extends="myPageEvent">
+    	<put-attribute name="title" value="응모한 이벤트 리스트"/>
+    	<put-attribute name="body" value="/WEB-INF/views/event/member_entryList.jsp"/>
+    </definition>
+    <!-- 마이페이지 당첨자 -->
+    <definition name="winName" extends="myPageEvent">
+    	<put-attribute name="title" value="응모권 당첨 내역"/>
+    	<put-attribute name="body" value="/WEB-INF/views/event/winName.jsp"/>
+    </definition>
+    
+    <!-- 글쓰기 -->
+    <definition name="eventWrite" extends="eventMain">
+    	<put-attribute name="title" value="글쓰기"/>
+    	<put-attribute name="body" value="/WEB-INF/views/event/eventWrite.jsp"/>
+    </definition>
+    
+    <!-- 글상세 -->
+    <definition name="eventView" extends="eventMain">
+    	<put-attribute name="title" value="글상세"/>
+    	<put-attribute name="body" value="/WEB-INF/views/event/eventView.jsp"/>
+    </definition>
+    <!-- 글수정 -->
+    <definition name="eventModify" extends="eventMain">
+    	<put-attribute name="title" value="글수정"/>
+    	<put-attribute name="body" value="/WEB-INF/views/event/eventModify.jsp"/>
+    </definition>
+    <!--응모권 리스트 글상세 -->
+    <definition name="entryName" extends="admin">
+    	<put-attribute name="title" value="응모한 회원 리스트"/>
+    	<put-attribute name="body" value="/WEB-INF/views/event/entryName.jsp"/>
+    </definition>
+    
+    <!-- event specail -->
+    <definition name="event_special" extends="eventMain">
+    	<put-attribute name="body" value="/WEB-INF/views/event/event_special.jsp"/>                                           
+    </definition>
+    <!-- event entry -->
+    <definition name="event_entry" extends="eventMain">
+    	<put-attribute name="body" value="/WEB-INF/views/event/event_entry.jsp"/>                                           
+    </definition>
+    <!-- event membership -->
+    <definition name="event_membership" extends="eventMain">
+    	<put-attribute name="body" value="/WEB-INF/views/event/event_membership.jsp"/>                                           
+    </definition>
+    <!-- event theater -->
+    <definition name="event_theater" extends="eventMain">
+    	<put-attribute name="body" value="/WEB-INF/views/event/event_theater.jsp"/>                                           
+    </definition>
+    <!-- event discount -->
+    <definition name="event_discount" extends="eventMain">
+    	<put-attribute name="body" value="/WEB-INF/views/event/event_discount.jsp"/>                                           
+    </definition>
+    <!-- event roulette -->
+    <definition name="event_roulette" extends="eventMain">
+    	<put-attribute name="body" value="/WEB-INF/views/event/event_roulette.jsp"/>                                           
+    </definition>
+    <!-- 관리자 -->
+    <!-- <definition name="entry" extends="admin">
+    	<put-attribute name="title" value="참여자리스트"/>
+    	<put-attribute name="body" value="/WEB-INF/views/event/entry.jsp"/>
+    </definition> -->
+    <!-- 이벤트 -->
+    <definition name="entryEventList" extends="admin">
+    	<put-attribute name="title" value="참여자리스트"/>
+    	<put-attribute name="body" value="/WEB-INF/views/event/entryEventList.jsp"/>
+    </definition>
+    <definition name="winnerEntry" extends="admin">
+    	<put-attribute name="title" value="당첨자"/>
+    	<put-attribute name="body" value="/WEB-INF/views/event/winnerEntry.jsp"/>
+    </definition>
+   
+</tiles-definitions>
+
+
+
+
+
+
+
+

@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.spring.store.dao.StoreMapper">
+	<!-- Store 글 등록 -->
+	<insert id="insertStore" parameterType="storeVO">
+		INSERT INTO store(
+			store_num,
+			store_title,
+			store_content,
+			store_price,
+			store_photo,
+			store_type,
+			store_ip,
+			store_status,
+			quantity,
+			mem_num)
+		VALUES (store_seq.nextval,
+			#{store_title},
+			#{store_content},
+			#{store_price},
+			#{store_photo,jdbcType=VARCHAR},
+			#{store_type},
+			#{store_ip},
+			#{store_status},
+			#{quantity},
+			#{mem_num})
+	</insert>
+	
+	<!-- Store 글 수정 -->
+	<update id="updateStore" parameterType="storeVO">
+		UPDATE store SET
+			<if test="store_photo != null">
+			store_photo=#{store_photo},
+			</if>
+			store_title=#{store_title},
+			store_content=#{store_content},
+			store_price=#{store_price},
+			store_type=#{store_type},
+			store_ip=#{store_ip},
+			store_status=#{store_status},
+			quantity=#{quantity},
+			store_modify_date=SYSDATE
+		WHERE store_num=#{store_num}
+	</update>
+	
+	<!-- ticketlist 목록 -->
+	<select id="selectTicketList" parameterType="map" resultType="storeVO">
+		SELECT *
+		FROM(
+			SELECT
+				a.*,
+				rownum rnum
+			FROM(
+				SELECT
+					store_num,
+					store_title,
+					store_content,
+					store_price,
+					store_photo
+				FROM 
+					store 
+				WHERE 
+					store_type=0
+				ORDER BY store_num DESC
+			)a
+		)
+		
+		<![CDATA[
+		WHERE rnum >= #{start} AND rnum <= #{end}
+		]]>
+	</select>
+	
+	<!-- popcornlist 목록 -->
+	<select id="selectPopcornList" parameterType="map" resultType="storeVO">
+		SELECT *
+		FROM(
+			SELECT
+				a.*,
+				rownum rnum
+			FROM(
+				SELECT
+					store_num,
+					store_title,
+					store_content,
+					store_price,
+					store_photo
+				FROM 
+					store 
+				WHERE 
+					store_type=1
+				ORDER BY store_num DESC
+			)a
+		)
+		
+		<![CDATA[
+		WHERE rnum >= #{start} AND rnum <= #{end}
+		]]>
+	</select>
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

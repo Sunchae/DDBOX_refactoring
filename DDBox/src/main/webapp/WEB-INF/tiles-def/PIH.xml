@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE tiles-definitions PUBLIC
+       "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN"
+       "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
+
+<tiles-definitions>
+	
+    <definition name="reserveMain" extends="main">
+    	<put-attribute name="title" value="예매"/>
+    	<put-attribute name="body" value="/WEB-INF/views/reserve/reserveMain.jsp"/>                                           
+    </definition>
+    
+    <definition name="reserveList" extends="main">
+    	<put-attribute name="title" value="상영정보"/>
+    	<put-attribute name="body" value="/WEB-INF/views/reserve/reserveList.jsp"/>                                           
+    </definition>
+    
+    <definition name="addReserve" extends="reserveList">
+    	<put-attribute name="title" value="상영정보 작성"/>
+    	<put-attribute name="body" value="/WEB-INF/views/reserve/addReserve.jsp"/>                                           
+    </definition>
+     
+    <definition name="seatMain" extends="main">
+    	<put-attribute name="title" value="좌석선택"/>
+    	<put-attribute name="body" value="/WEB-INF/views/reserve/seatMain.jsp"/>                                           
+    </definition>
+    
+    <definition name="payMain" extends="main">
+    	<put-attribute name="title" value="결제하기"/>
+    	<put-attribute name="body" value="/WEB-INF/views/reserve/payMain.jsp"/>                                           
+    </definition>
+    
+    <definition name="payConfirm" extends="main">
+    	<put-attribute name="title" value="결제확인"/>
+    	<put-attribute name="body" value="/WEB-INF/views/reserve/payConfirm.jsp"/>                                           
+    </definition>
+    
+</tiles-definitions>
+
+
+
+
+

@@ -1,0 +1,73 @@
+@charset "UTF-8";
+
+.movie-lists {
+	margin-top: 20px;
+    margin-bottom: 20px;
+    position: relative;
+    overflow: hidden;
+}
+
+.movie-poster {
+    transition: filter 0.3s ease-in-out;
+    height: 530px;
+}
+
+.movie-lists .movie-summary {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 80%; /* 영화 요약의 폭을 조절하세요 */
+    display: none;
+    background: rgba(255, 255, 255, 0.9);
+    padding: 20px;
+    text-align: center;
+}
+
+.movie-lists:hover .movie-poster:hover {
+    filter: blur(10px);
+}
+
+.movie-lists:hover .movie-summary {
+    display: block;
+}
+
+/* 일반적인 포스터 링크 스타일 */
+.poster-link {
+    text-decoration: none; /* 링크 밑줄 제거 */
+    cursor: pointer;  /* 포인터로 변경 */
+    position: relative; /* 상대적 위치 설정 */
+}
+
+/* 포스터가 hover 되었을 때 스타일 변경 */
+.poster-link:hover .movie-poster {
+    filter: brightness(90%); /* 밝기를 줄여서 포스터 어둡게 만들기 (선택 사항) */
+}
+
+/* 링크를 감싸는 레이어에 클릭 이벤트를 추가 */
+.poster-link .event-layer {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    pointer-events: auto;  /* 링크 레이어에 클릭 이벤트 활성화 */
+    z-index: 2; /* 링크 레이어를 다른 요소 위에 표시되도록 함 */
+}
+/* 좋아요 버튼 스타일 */
+.like-button {
+    display: inline-block; /* 항상 표시됨 */
+}
+
+.heart-icon {
+    width: 30px; /* 아이콘의 너비 */
+    height: 30px; /* 아이콘의 높이 */
+    margin-right: 2px; /* 텍스트와의 간격 */
+    vertical-align: middle; /* 버튼 내에서 중앙 정렬 */
+}
+.heart-icon:hover {
+    opacity: 0.8; /* 마우스를 올렸을 때 아이콘의 투명도 변경 */
+}
+
+
+  

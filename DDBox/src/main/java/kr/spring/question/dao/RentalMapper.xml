@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.spring.question.dao.RentalMapper">
+	<!-- 문의 글등록 -->
+	<insert id="insertRental" parameterType="rentalVO">
+		INSERT INTO rental(
+			rental_num,
+			mem_num,
+			scr_num,
+			rental_per,
+			rental_content,
+			rental_name,
+			rental_phone,
+			rental_email,
+			rental_date)
+		VALUES (
+			rental_seq.nextval,
+			#{mem_num},
+			#{scr_num},
+			#{rental_per},
+			#{rental_content},
+			#{rental_name},
+			#{rental_phone},
+			#{rental_email},
+			#{rental_date})
+	</insert>
+	
+
+	<!-- 검색 기능 -->
+	<sql id="rentalSearch">
+		<where>
+			<if test="keyword != null and keyword != ''">
+				AND rental_name LIKE '%' || #{keyword} || '%' OR
+				rental_content LIKE '%' || #{keyword} || '%' 
+			</if>
+		</where>
+	</sql>
+	
+	<!-- 검색 기능 -->
+	<sql id="rentalSearchForAdmin">
+		<where>
+			<if test="keyword != null and keyword != ''">
+				rental_name LIKE '%' || #{keyword} || '%' OR
+				rental_content LIKE '%' || #{keyword} || '%' 
+			</if>
+		</where>
+	</sql>
+	
+	<!-- 총 개수/ 검색 개수 -->
+	<select id="selectRowCount" parameterType="map" resultType="integer">
+		SELECT
+			COUNT(*)
+		FROM rental JOIN member USING (mem_num) WHERE mem_num=#{mem_num}
+		<include refid="rentalSearch"></include>
+	</select>
+	
+	<!-- 전체 목록/ 검색 목록 -->
+	<select id="selectList" parameterType="map" resultType="rentalVO">
+		SELECT
+			*
+		FROM(SELECT
+				a.*,
+				rownum rnum
+			FROM (SELECT
+					rental_num,
+					scr_num,
+					rental_name,
+					rental_date,
+					rental_regdate,
+					rental_status
+				  FROM rental
+				  JOIN member USING(mem_num)
+				  WHERE mem_num=#{mem_num}
+				  <include refid="rentalSearch"></include>
+				  ORDER BY rental_regdate DESC)a)
+		<![CDATA[
+		WHERE rnum >= #{start} AND rnum <= #{end}
+		]]>
+	</select>
+	
+	<!-- 관리자 -->
+	<!-- 총 개수/ 검색 개수 -->
+	<select id="selectRowCountForAdmin" parameterType="map" resultType="integer">
+		SELECT
+			COUNT(*)
+		FROM rental JOIN member USING (mem_num)
+		<include refid="rentalSearchForAdmin"></include>
+	</select>
+	
+	<!-- 전체 목록/ 검색 목록 -->
+	<select id="selectListForAdmin" parameterType="map" resultType="rentalVO">
+		SELECT
+			*
+		FROM(SELECT
+				a.*,
+				rownum rnum
+			FROM (SELECT
+					rental_num,
+					scr_num,
+					rental_name,
+					rental_date,
+					rental_regdate,
+					rental_status
+				  FROM rental
+				  JOIN member USING(mem_num)
+				  <include refid="rentalSearchForAdmin"></include>
+				  ORDER BY rental_regdate DESC)a)
+		<![CDATA[
+		WHERE rnum >= #{start} AND rnum <= #{end}
+		]]>
+	</select>
+	
+	<!-- 글 상세 (기존)
+	<select id="selectRental" parameterType="integer">
+		SELECT
+			*
+		FROM rental
+		JOIN member USING(mem_num) 
+		LEFT OUTER JOIN member_detail USING(mem_num) 
+		WHERE rental_num=#{rental_num}
+	</select>-->
+	
+	<!-- 글 상세 // scr_name 포함 -->
+	<select id="selectRental" parameterType="integer">
+		SELECT
+			r.*,
+			m.mem_id,
+			s.scr_name
+		FROM rental r
+		JOIN member m ON r.mem_num = m.mem_num
+		LEFT JOIN screen s ON r.scr_num = s.scr_num
+		WHERE rental_num=#{rental_num}
+	</select>
+	
+	
+	<!-- 대관 문의 수정 -->
+	<update id="updateRental" parameterType="rentalVO">
+		UPDATE rental SET
+			scr_num=#{scr_num},
+			rental_modifydate=SYSDATE,
+			rental_per=#{rental_per},
+			rental_content=#{rental_content},
+			rental_name=#{rental_name},
+			rental_phone=#{rental_phone},
+			rental_email=#{rental_email},
+			rental_date=#{rental_date}
+		WHERE rental_num=#{rental_num}
+	</update>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+</mapper>

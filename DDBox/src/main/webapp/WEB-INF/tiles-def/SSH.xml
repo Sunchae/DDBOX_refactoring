@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE tiles-definitions PUBLIC
+       "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN"
+       "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
+
+<tiles-definitions>
+    <definition name="SSH" extends="main">
+    	<put-attribute name="title" value="회원가입"/>
+    	<put-attribute name="body"
+    	               value="/WEB-INF/views/member/memberRegister.jsp"/>                                           
+    </definition>
+    
+    <!-- faq 메인 -->
+    <definition name="faqMain" template="/WEB-INF/views/template/layout_faq.jsp">
+    	<put-attribute name="title" value="문의 게시판"/>
+    	<put-attribute name="header" value="/WEB-INF/views/template/DDBox_navbar.jsp"/> 
+    	<put-attribute name="body" value="/WEB-INF/views/faq/faq_main.jsp"/>
+    	<put-attribute name="nav" value="/WEB-INF/views/template/DDBox_faq_sidebar.jsp"/>
+    	<put-attribute name="footer" value="/WEB-INF/views/template/footer.jsp"/>
+    </definition>
+    
+    
+    
+    
+    <!-- 자주묻는 질문 -->
+    <definition name="faq_question" template="/WEB-INF/views/template/layout_faq.jsp">
+    	<put-attribute name="title" value="자주 묻는 질문"/>
+    	<put-attribute name="header" value="/WEB-INF/views/template/DDBox_navbar.jsp"/> 
+    	<put-attribute name="body" value="/WEB-INF/views/faq/question/question.jsp"/>
+    	<put-attribute name="nav" value="/WEB-INF/views/template/DDBox_faq_sidebar.jsp"/>
+    	<put-attribute name="footer" value="/WEB-INF/views/template/footer.jsp"/>
+    </definition>
+    <!-- 작성 -->
+    <definition name="question_write" extends="faq_question">
+   		<put-attribute name="css" value="/WEB-INF/views/faq/faqCSS.jsp"/>
+    	<put-attribute name="body" value="/WEB-INF/views/faq/question/question_write.jsp"/>
+    </definition>
+    <!-- 상세 -->
+    <definition name="question_detail" extends="faq_question">
+    	<put-attribute name="body" value="/WEB-INF/views/faq/question/question_detail.jsp"/>                                           
+    </definition>
+    <!-- 수정 -->
+    <definition name="question_update" extends="faq_question">
+    	<put-attribute name="css" value="/WEB-INF/views/faq/faqCSS.jsp"/>
+    	<put-attribute name="body" value="/WEB-INF/views/faq/question/question_update.jsp"/>                                           
+    </definition>
+    
+    
+    
+    
+    <!-- 공지/뉴스 -->
+    <definition name="news" extends="faqMain">
+    	<put-attribute name="body" value="/WEB-INF/views/faq/news/news.jsp"/>                                           
+    </definition>
+    <!-- 작성 -->
+    <definition name="news_write" extends="faqMain">
+    	<put-attribute name="body" value="/WEB-INF/views/faq/news/news_write.jsp"/>                                           
+    </definition>    
+    <!-- 상세 -->
+    <definition name="news_detail" extends="faqMain">
+    	<put-attribute name="body" value="/WEB-INF/views/faq/news/news_detail.jsp"/>                                           
+    </definition> 
+    <!-- 수정 -->
+    <definition name="news_update" extends="faqMain">
+    	<put-attribute name="body" value="/WEB-INF/views/faq/news/news_update.jsp"/>                                           
+    </definition>
+    
+    
+    
+    <!-- vip -->
+    <definition name="vip" extends="faqMain">
+    	<put-attribute name="body" value="/WEB-INF/views/faq/vip/vip.jsp"/>                                           
+    </definition>
+    <!-- 작성 -->
+    <definition name="vip_write" extends="faqMain">
+    	<put-attribute name="body" value="/WEB-INF/views/faq/vip/vip_write.jsp"/>                                           
+    </definition> 
+    <!-- 상세 -->
+    <definition name="vip_detail" extends="faqMain">
+    	<put-attribute name="body" value="/WEB-INF/views/faq/vip/vip_detail.jsp"/>                               
+    </definition> 
+    <!-- 수정 -->
+    <definition name="vip_update" extends="faqMain">
+    	<put-attribute name="body" value="/WEB-INF/views/faq/vip/vip_update.jsp"/>                                           
+    </definition>
+    
+    
+    
+    <!-- 이메일 문의 -->
+    <definition name="email" extends="faqMain">
+    	<put-attribute name="body" value="/WEB-INF/views/faq/email/email.jsp"/>                                           
+    </definition>
+    <!-- 작성 -->
+    <definition name="email_write" extends="faqMain">
+    	<put-attribute name="body" value="/WEB-INF/views/faq/email/email_write.jsp"/>                                           
+    </definition>
+    <!-- 상세 -->
+    <definition name="email_detail" extends="faqMain">
+    	<put-attribute name="body" value="/WEB-INF/views/faq/email/email_detail.jsp"/>                                           
+    </definition>
+    <!-- 관리자 답글 작성(수정) -->
+    <definition name="email_update" extends="faqMain">
+    	<put-attribute name="body" value="/WEB-INF/views/faq/email/email_update.jsp"/>                                           
+    </definition>
+    
+        
+      
+    
+    <!-- 대관 문의 -->
+    <definition name="rental" extends="faqMain">
+    	<put-attribute name="body" value="/WEB-INF/views/faq/rental/rental.jsp"/>                                           
+    </definition>
+    <!-- 작성 -->
+    <definition name="rental_write" extends="faqMain">
+    	<put-attribute name="body" value="/WEB-INF/views/faq/rental/rental_write.jsp"/>                                           
+    </definition>
+    <!-- 상세 -->
+    <definition name="rental_detail" extends="faqMain">
+    	<put-attribute name="body" value="/WEB-INF/views/faq/rental/rental_detail.jsp"/>                                           
+    </definition>
+    <!-- 수정 
+    <definition name="rental_update" extends="faqMain">
+    	<put-attribute name="body" value="/WEB-INF/views/faq/rental/rental_update.jsp"/>                                           
+    </definition>-->
+    
+    
+    
+	<!--  채팅 리스트  -->
+	<definition name="chatUser" extends="faqMain">
+		<put-attribute name="body" value="/WEB-INF/views/faq/chat/chatUser.jsp"/>
+	</definition>
+	<!--  회원 채팅방 detail (리스트 x)  -->
+	<definition name="chatUserRoom_detailForUser" extends="faqMain">
+		<put-attribute name="body" value="/WEB-INF/views/faq/chat/chatUserRoom_detail.jsp"/>
+	</definition>
+	
+	<definition name="chatUserRoom_detailForAdmin" extends="admin">
+		<put-attribute name="body" value="/WEB-INF/views/faq/chat/chatUserRoom_detail.jsp"/>
+	</definition>
+	
+	<!-- 관리자 채팅방 리스트 -->
+    <definition name="chattingListForAdmin" extends="admin">
+		<put-attribute name="body" value="/WEB-INF/views/faq/chat/chattingListForAdmin.jsp"/>
+	</definition>
+	
+	<!-- 관리자 이메일 문의 리스트 -->
+	<definition name="email_admin" extends="admin">
+		<put-attribute name="body" value="/WEB-INF/views/faq/email/email_admin.jsp"/>
+	</definition>
+	
+	<!-- 관리자 대관 문의 리스트 -->
+	<definition name="rental_admin" extends="admin">
+		<put-attribute name="body" value="/WEB-INF/views/faq/rental/rental_admin.jsp"/>
+	</definition>
+	
+	
+  
+    
+</tiles-definitions>
+
+
+
+
+

@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.spring.member.dao.MemberMapper">
+	<!-- 회원가입 상세 -->     
+	<insert id="insertMember_detail" parameterType="memberVO">
+		INSERT INTO member_detail (
+			mem_num,
+			mem_name,
+			mem_pw,
+			mem_phone,
+			mem_email,
+			mem_zipcode,
+			mem_address1,
+			mem_address2,
+			mem_birth,
+			mem_gender,
+			mem_age
+			
+		)
+		VALUES (
+			#{mem_num},
+			#{mem_name},
+			#{mem_pw},
+			#{mem_phone},
+			#{mem_email},
+			#{mem_zipcode},
+			#{mem_address1},
+			#{mem_address2},
+			#{mem_birth},
+			<choose>
+				<when test="mem_gender == 'Male'">1</when>
+				<when test="mem_gender == 'Female'">2</when>
+				<otherwise>0</otherwise> <!-- 다른 값이 들어온 경우에 대한 기본값 -->
+			</choose>,
+			<choose>
+				<when test="mem_age == '10대'">1</when>
+				<when test="mem_age == '20대'">2</when>
+				<when test="mem_age == '30대'">3</when>
+				<when test="mem_age == '40대'">4</when>
+				<when test="mem_age == '50대 이상'">5</when>
+				<otherwise>0</otherwise> <!-- 다른 값이 들어온 경우에 대한 기본값 -->
+			</choose>
+		)
+	</insert>
+	<!-- 아이디 중복 체크 및 로그인 체크 -->
+	<select id="selectCheckMember" parameterType="string">
+		SELECT
+			mem_num,
+			mem_id,
+			mem_auth,
+			mem_nickname,
+			mem_autoid,
+			mem_pw,
+			mem_email
+		FROM member LEFT OUTER JOIN member_detail
+		USING(mem_num)
+		WHERE mem_id=#{mem_id}	
+	</select>
+	
+	<select id="selectCheckMemberRegistered" parameterType="string">
+		SELECT
+			COUNT(*)
+		FROM member_detail
+		WHERE mem_name=#{mem_name} AND mem_birth=#{mem_birth} AND mem_phone=#{mem_phone}
+	</select>
+	
+	<update id="updateMember_detail" parameterType="memberVO">
+	UPDATE member_detail
+   	SET
+        mem_phone = #{mem_phone},
+        mem_email = #{mem_email},
+        mem_zipcode = #{mem_zipcode},
+        mem_address1 = #{mem_address1},
+        mem_address2 = #{mem_address2},
+        mem_modifydate = SYSDATE
+    WHERE mem_num = #{mem_num}
+			
+	</update>
+	
+	
+	
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

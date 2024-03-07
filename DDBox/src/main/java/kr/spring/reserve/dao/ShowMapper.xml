@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.spring.reserve.dao.ShowMapper">
+   <insert id="insertShow" parameterType="showVO">
+      INSERT INTO show(
+         shw_num,
+         shw_sdate,
+         shw_edate,
+         shw_time,
+         shw_seatCnt,
+         scr_num,
+         movie_num
+         )
+      VALUES(
+         show_seq.nextval,
+         #{shw_sdate},
+         #{shw_edate},
+         #{shw_time},
+         #{shw_seatCnt},
+         #{scr_num},
+         #{movie_num}
+         )
+   </insert>
+   
+   <select id="selectRowShowCount" parameterType="map" resultType="integer">
+      SELECT
+         COUNT(*)
+      FROM
+         show
+      JOIN
+         movie
+      USING(movie_num)   
+   </select>
+   
+    
+   <select id="selectShowList" parameterType="map" resultType="showVO">
+      SELECT
+         *
+      FROM (SELECT
+         a.*,
+         rownum rnum
+      FROM (SELECT
+            shw_num,
+            shw_sdate,
+            shw_edate,
+            shw_time,
+            shw_seatCnt,
+            scr_name,
+            movie_title
+          FROM show
+          LEFT OUTER JOIN (SELECT * FROM screen) USING(scr_num)
+          LEFT OUTER JOIN (SELECT * FROM movie) USING(movie_num)
+          ORDER BY scr_num DESC)a)
+      <![CDATA[
+         WHERE rnum >= #{start} AND rnum <= #{end}
+         ]]>    
+   </select>
+   
+   <select id="selectShowListForRev" parameterType="integer" resultType="showVO">
+      SELECT
+         DISTINCT(scr_name), 
+         scr_num
+      FROM
+         show
+      LEFT OUTER JOIN (SELECT * FROM screen) USING(scr_num)
+      WHERE movie_num=#{movie_num}
+   </select>
+   
+   
+   <select id="selectShow" parameterType="showVO" resultType="String">
+   SELECT
+      scr_name
+   FROM
+      (SELECT
+         scr_name
+      FROM
+         show
+      LEFT OUTER JOIN (SELECT * FROM screen) USING(scr_num)
+      LEFT OUTER JOIN (SELECT * FROM movie) USING(movie_num)
+      WHERE movie_num=#{movie_num})
+      WHERE scr_name=#{scr_name};
+   </select>
+   
+   <select id="selectShowTimeList" parameterType="map" resultType="showVO" >
+   
+   SELECT s.shw_time,s.shw_num
+    FROM show s
+    WHERE #{choice_date} BETWEEN s.shw_sdate AND s.shw_edate
+        AND s.movie_num= #{choice_num}
+        AND s.scr_num = #{choice_screen}
+   </select>
+   
+   
+   
+   <sql id="movieOrder">
+      <if test="order == 1">
+         ORDER BY movie_num DESC
+      </if>
+      <if test="order == 2">
+         ORDER BY scr_num DESC
+      </if>
+   </sql>
+   
+</mapper>
+

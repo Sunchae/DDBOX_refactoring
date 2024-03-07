@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.spring.movie.dao.MovieMapper">
+	<!-- 영화 데이터 삽입 -->
+	<insert id="insertMovieData" parameterType="movieVO">
+	INSERT INTO movie(
+		movie_num,
+		movie_title,
+		movie_original_title,
+		movie_tagline,
+		movie_popularity,
+		movie_director,
+		movie_opendate,
+		movie_poster,
+		movie_gradeNm,
+		movie_img1,
+		movie_img2,
+		movie_img3,
+		movie_overview,
+		movie_runtime,
+		movie_status)
+	VALUES (
+		#{movie_num},
+		#{movie_title},
+		#{movie_original_title,jdbcType=VARCHAR},
+		#{movie_tagline,jdbcType=VARCHAR},
+		#{movie_popularity,jdbcType=VARCHAR},
+		#{movie_director,jdbcType=VARCHAR},
+		#{movie_opendate},
+		#{movie_poster},
+		#{movie_gradeNm,jdbcType=VARCHAR},
+		#{movie_img1,jdbcType=VARCHAR},
+		#{movie_img2,jdbcType=VARCHAR},
+		#{movie_img3,jdbcType=VARCHAR},
+		#{movie_overview,jdbcType=VARCHAR},
+		#{movie_runtime,jdbcType=VARCHAR},
+		#{movie_status,jdbcType=VARCHAR})
+		
+	</insert>
+	<update id="updateMovieData" parameterType="movieVO">
+	UPDATE movie
+	SET movie_tagline=#{movie_tagline},
+		movie_status=#{movie_status},
+		movie_runtime=#{movie_runtime},
+		movie_director=#{movie_director},
+		movie_img1=#{movie_img1},
+		movie_img2=#{movie_img2},
+		movie_img3=#{movie_img3},
+		movie_gradeNm=#{movie_gradeNm}
+	WHERE movie_num=#{movie_num}	
+		
+	</update>
+	
+	<select id="selectMoviesByDate" parameterType="String">
+		SELECT DISTINCT m.movie_title, m.movie_num, m.movie_gradeNm
+		FROM movie m
+		JOIN show s ON m.movie_num = s.movie_num
+		WHERE
+		#{date} BETWEEN s.shw_sdate AND s.shw_edate
+	</select>
+	
+	<select id="selectMovieListWithLikes" resultType="movieVO">
+		<![CDATA[
+		SELECT *
+		FROM (
+		SELECT m.*, (SELECT COUNT(*) FROM movie_fav WHERE movie_num = m.movie_num) AS
+		likesCount
+		FROM movie m
+		ORDER BY movie_popularity DESC
+		)
+		WHERE ROWNUM <= 10
+		]]>
+	</select>
+	
+	
+	<select id="countLikesByGender" parameterType="int" resultType="java.util.HashMap">
+
+	SELECT
+		SUM(CASE WHEN md.mem_gender = 1 THEN 1 ELSE 0 END) AS male_count,
+		SUM(CASE WHEN md.mem_gender = 2 THEN 1 ELSE 0 END) AS female_count
+	FROM
+		member_detail md
+	JOIN
+		movie_fav mf ON md.mem_num = mf.mem_num
+	WHERE
+		mf.movie_num = #{movie_num}
+    </select>
+	<select id="countLikesByAgeGroup" parameterType="int" resultType="java.util.HashMap">
+        SELECT
+            SUM(CASE WHEN md.mem_age = 1 THEN 1 ELSE 0 END) AS "10대",
+            SUM(CASE WHEN md.mem_age = 2 THEN 1 ELSE 0 END) AS "20대",
+            SUM(CASE WHEN md.mem_age = 3 THEN 1 ELSE 0 END) AS "30대",
+            SUM(CASE WHEN md.mem_age = 4 THEN 1 ELSE 0 END) AS "40대",
+            SUM(CASE WHEN md.mem_age = 5 THEN 1 ELSE 0 END) AS "50대이상"
+        FROM
+            member_detail md
+        JOIN
+            movie_fav mf ON md.mem_num = mf.mem_num
+        WHERE
+            mf.movie_num = #{movieNum}
+    </select>
+    
+    
+    <!-- 영화 키워드 검색 -->
+    <select id="searchMoviesByKeyword" resultType="MovieVO">
+        SELECT movie_num, movie_title FROM movie
+        WHERE movie_title LIKE '%' || #{keyword} || '%'
+    </select>
+    
+</mapper>

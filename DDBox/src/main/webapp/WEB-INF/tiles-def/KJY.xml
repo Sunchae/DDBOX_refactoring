@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE tiles-definitions PUBLIC
+       "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN"
+       "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
+
+<tiles-definitions>
+    
+    <definition name="storeMainTest" template="/WEB-INF/views/template/store_layout.jsp">
+    	<put-attribute name="title" value="스토어 메인"/>
+    	<put-attribute name="header" value="/WEB-INF/views/template/DDBox_navbar.jsp"/> 
+    	<put-attribute name="body" value="/WEB-INF/views/store/storeMainTest.jsp"/>
+    	<put-attribute name="nav" value="/WEB-INF/views/template/store_nav.jsp"/>
+    	<put-attribute name="footer" value="/WEB-INF/views/template/footer.jsp"/>
+    </definition>
+    
+<!--     
+    <definition name="storeMain" extends="main">
+    	<put-attribute name="title" value="스토어 메인"/>
+    	<put-attribute name="body" value="/WEB-INF/views/store/storeMain.jsp"/>                                           
+    </definition>
+-->
+    <definition name="storeWrite" extends="storeMainTest">
+    	<put-attribute name="title" value="글쓰기"/>
+    	<put-attribute name="css" value="/WEB-INF/views/store/storeCSS.jsp" />
+    	<put-attribute name="body" value="/WEB-INF/views/store/storeWrite.jsp"/>
+    </definition>
+    <definition name="storeDetail" extends="storeMainTest">
+    	<put-attribute name="title" value="글상세" />
+    	<put-attribute name="body" value="/WEB-INF/views/store/storeDetail.jsp" />
+    </definition>
+    <definition name="storeModify" extends="storeMainTest">
+    	<put-attribute name="title" value="글수정"/>
+    	<put-attribute name="css" value="/WEB-INF/views/store/storeCSS.jsp" />
+    	<put-attribute name="body" value="/WEB-INF/views/store/storeModify.jsp"/>
+    </definition>
+    <definition name="storeTicketList" extends="storeMainTest">
+    	<put-attribute name="title" value="디디티켓"/>
+    	<put-attribute name="body" value="/WEB-INF/views/store/storeTicketList.jsp"/>                                           
+    </definition>
+    <definition name="storePopcorn" extends="storeMainTest">
+    	<put-attribute name="title" value="팝콘/음료/굿즈"/>
+    	<put-attribute name="body" value="/WEB-INF/views/store/storePopcorn.jsp"/>                                           
+    </definition>
+    <definition name="payDetail" extends="storeMainTest">
+    	<put-attribute name="title" value="결제상세"/>
+    	<put-attribute name="body" value="/WEB-INF/views/pay/payDetail.jsp"/>                                           
+    </definition>
+    <definition name="storePay" extends="storeMainTest">
+    	<put-attribute name="title" value="결제상세" />
+    	<put-attribute name="body" value="/WEB-INF/views/store/storePay.jsp" />
+    </definition>
+    <definition name="insertPay" extends="storeMainTest">
+    	<put-attribute name="title" value="결제상세" />
+    	<put-attribute name="body" value="/WEB-INF/views/store/storePay.jsp" />
+    </definition>
+    <definition name="storePayMain" extends="myPage">
+    	<put-attribute name="title" value="결제상세" />
+    	<put-attribute name="body" value="/WEB-INF/views/store/storePayMain.jsp" />
+    </definition>
+    <definition name="storePayDetail" extends="storeMainTest">
+    	<put-attribute name="title" value="결제확인" />
+    	<put-attribute name="body" value="/WEB-INF/views/store/storePayDetail.jsp" />
+    </definition>
+    
+</tiles-definitions>
+

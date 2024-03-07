@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.spring.question.dao.ChatMapper">
+	<!-- 채팅방 생성 -->
+	<insert id="insertChatRoom" parameterType="chatroomVO">
+		INSERT INTO faq_chatroom(
+			chatroom_num,
+			user_num,
+			admin_num)
+		VALUES (
+			faq_chatroom_seq.nextval,
+			#{user_num},
+			#{admin_num})
+	</insert>
+	
+	<!-- 검색 기능  mem_num으로는 가능
+	<sql id="chatSearch">
+		<where>
+			<if test="keyword != null and keyword != ''">
+				AND c.user_num LIKE '%' || #{keyword} || '%' 
+			</if>
+		</where>
+	</sql>-->
+	
+	
+	<!-- 검색 기능 -->
+	<sql id="chatSearch">
+	    <where>
+	        <if test="keyword != null and keyword != ''">
+	            c.user_num IN (
+	                SELECT mem_num FROM member WHERE mem_id LIKE '%' || #{keyword} || '%'
+	            )
+	        </if>
+	    </where>
+	</sql>
+	
+	
+
+	<!-- 채팅 메시지 읽기 -->
+	<select id="selectChatDetail" parameterType="integer" resultType="chatVO">
+		SELECT
+			<![CDATA[
+			REPLACE(REPLACE(message,'<','&lt;'),'>','&gt;') message,
+			]]>
+			chat_num,
+			chatroom_num,
+			mem_num,
+			reg_date,
+			read_check
+		FROM faq_chat
+		WHERE chatroom_num = #{chatroom_num}
+		ORDER BY reg_date ASC
+	</select>
+	
+	<insert id="insertChat" parameterType="ChatVO">
+		INSERT INTO faq_chat(
+			chat_num,
+			chatroom_num,
+			mem_num,
+			message)
+		VALUES(
+			faq_chat_seq.nextval,
+			#{chatroom_num},
+			#{mem_num},
+			#{message})
+	</insert>
+	
+	
+	<!-- 관리자 채팅방 목록 / 개수 -->
+	<select id="selectRowCount" parameterType="map" resultType="integer">
+		SELECT 
+			COUNT(*)
+	     FROM faq_chatroom c 
+		 JOIN (SELECT 
+			     chatroom_num 
+		       FROM faq_chat 
+		       GROUP BY chatroom_num) USING (chatroom_num)
+		       <include refid="chatSearch"></include>
+	</select>
+	
+	<!-- 목록 되는거 
+	<select id="selectChatRoomList" parameterType="map" resultType="chatroomVO">
+		SELECT
+			*
+		FROM (SELECT
+				a.*,
+				rownum rnum
+			 FROM (SELECT 
+			          * 
+			        FROM faq_chatroom c 
+			        JOIN (SELECT 
+			                 chatroom_num 
+			              FROM faq_chat 
+			              GROUP BY chatroom_num) USING (chatroom_num)
+                    LEFT OUTER JOIN (SELECT 
+                                        COUNT(*) cnt, 
+                                        chatroom_num 
+                                     FROM faq_chat 
+                                     WHERE read_check=1 AND mem_num!=2 
+                                     GROUP BY chatroom_num) USING (chatroom_num) 
+                    JOIN member m on c.user_num=m.mem_num 
+                    <include refid="chatSearch"></include>
+                    ORDER BY cnt DESC NULLS LAST)a)
+		<![CDATA[
+		WHERE rnum >= #{start} AND rnum <= #{end}
+		]]>
+	</select> -->
+	
+	<!-- gpt 버전 목록 -->
+	<select id="selectChatRoomList" parameterType="map" resultType="chatroomVO">
+	    SELECT
+	        *
+	    FROM (
+	        SELECT
+	            a.*,
+	            rownum rnum
+	        FROM (
+	            SELECT 
+	                c.*, m.mem_id
+	            FROM faq_chatroom c 
+	            JOIN member m ON c.user_num = m.mem_num
+	            LEFT OUTER JOIN (
+	                SELECT 
+	                    COUNT(*) cnt, 
+	                    chatroom_num 
+	                FROM faq_chat 
+	                WHERE read_check=1 AND mem_num != 2 
+	                GROUP BY chatroom_num
+	            ) cnt ON c.chatroom_num = cnt.chatroom_num
+	            <include refid="chatSearch"></include>
+	            ORDER BY cnt DESC NULLS LAST
+	        ) a
+	    )
+	    <![CDATA[
+	    WHERE rnum >= #{start} AND rnum <= #{end}
+	    ]]>
+	</select>
+
+	
+	
+</mapper>

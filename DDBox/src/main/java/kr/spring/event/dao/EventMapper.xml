@@ -1,0 +1,214 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.spring.event.dao.EventMapper">
+	<!-- 이벤트 글 등록 -->
+	<insert id="insertEvent" parameterType="Event_listVO">
+		INSERT INTO event_list(
+			event_num,
+			event_title,
+			event_content,
+			event_type,
+			event_photo1,
+			event_photo2,
+			event_start,
+			event_end,
+			mem_num)
+		VALUES(
+			eventlist_seq.nextval,
+			#{event_title},
+			#{event_content},
+			#{event_type},
+			#{event_photo1,jdbcType=VARCHAR},
+			#{event_photo2,jdbcType=VARCHAR},
+			#{event_start},
+			#{event_end},
+			#{mem_num})
+	</insert>
+	
+	<!-- 게시판 글의 총개수/검색 개수 -->
+	<select id="selectRowCount" parameterType="map" resultType="integer">
+		SELECT
+			COUNT(*)
+		FROM event_list JOIN member USING(mem_num)
+	</select>
+	
+	
+	<!-- 이벤트글 전체 목록/검색 목록 -->
+	<select id="selectList" parameterType="map" resultType="Event_listVO">
+		SELECT *
+		FROM (
+			SELECT
+				a.*,
+				rownum rnum
+			FROM (
+				SELECT
+					event_num,
+					<![CDATA[
+					REPLACE(REPLACE(event_title,'<','&lt;'),'>','&gt;') event_title,
+					]]>
+					event_start,
+					event_end,
+					event_type,
+					event_photo1,
+					hit,
+					event_status,
+					mem_num
+				FROM event_list
+				
+				ORDER BY event_num DESC
+			)a
+		)
+		
+		<![CDATA[
+		WHERE rnum >= #{start} AND rnum <= #{end}
+		]]>
+	</select>
+	
+	<!-- 글 수정 -->
+	<update id="updateEvent" parameterType="Event_listVO">
+		UPDATE event_list SET
+			event_title=#{event_title},
+			event_content=#{event_content},
+			event_type=#{event_type},
+			event_photo1=#{event_photo1,jdbcType=VARCHAR},
+			event_photo2=#{event_photo2,jdbcType=VARCHAR},
+			event_start=#{event_start},
+			event_end=#{event_end}
+		WHERE event_num=#{event_num}
+	</update>
+	
+	<!-- 글 상세 -->
+	<select id="selectEvent" parameterType="integer">
+		SELECT
+			*
+		FROM event_list
+		JOIN member USING(mem_num)
+		WHERE event_num=#{event_num}
+	</select>
+	<!-- 룰렛 참여자 등록 -->
+	<insert id="insertRentry" parameterType="Rentry_listVO">
+		INSERT INTO rentry_list(
+			rentry_num,
+			event_point,
+			mem_num,
+			rentry_date)
+		VALUES (
+			rentrylist_seq.nextval,
+			#{event_point},
+			#{mem_num},
+			SYSDATE)
+	</insert>
+	<!-- 응모권 참여자 등록 --> 
+	<insert id="insertEntry" parameterType="map">
+		INSERT INTO entry_list(
+			entry_num,
+			event_num,
+			mem_num,
+			entry_date,
+			win_type)
+		VALUES (
+			entrylist_seq.nextval,
+			#{event_num},
+			#{mem_num},
+			SYSDATE,
+			#{win_type})
+	</insert>
+	<!-- <sql id="entrySub">
+		FROM entry_list JOIN member USING (mem_num)
+		LEFT OUTER JOINT (SELECT
+							event_num,
+							event_title
+						FROM event_list
+						WHERE event_num=#{event_num}
+						GROUP BY event_num,event_title) USING(event_num)
+						
+	</sql>
+	 -->
+	
+	<!-- 응모권 이벤트글 전체 목록/검색 목록 -->
+	<select id="selectEntryList" parameterType="map" resultType="Entry_listVO">
+					
+		SELECT *
+		FROM (
+			SELECT
+				a.*,
+				rownum rnum
+			FROM (
+				SELECT
+					event_num,
+					<![CDATA[
+					REPLACE(REPLACE(event_title,'<','&lt;'),'>','&gt;') event_title,
+					]]>
+                    entry_list.mem_num
+				FROM entry_list 
+				LEFT OUTER JOIN
+			            event_list USING(event_num) 
+				ORDER BY entry_date DESC) a)
+		<![CDATA[
+		WHERE rnum >= #{start} AND rnum <= #{end} AND mem_num=#{mem_num}
+		]]>
+	</select>
+	
+	<!-- 참여자 상세 -->
+	<select id="selectEntry" parameterType="integer" resultType="Entry_listVO">
+		SELECT
+			*
+		FROM entry_list						
+		JOIN member USING(mem_num)
+		WHERE event_num=#{event_num}
+	</select>
+	<!-- 당첨자 -->
+	<select id="winnerEntry" parameterType="integer" resultType="Entry_listVO">
+		SELECT
+			*
+		FROM entry_list						
+		JOIN member USING(mem_num)
+        JOIN event_list USING(event_num)
+		WHERE entry_num=#{entry_num}
+	</select>
+	<!-- <update id="updateEntryAdmin" parameterType="Entry_listVO">
+		UPDATE entry_list SET
+			win_date=SYSDATE,
+			win_type=#{win_type}
+		WHERE entry_num=#{entry_num}
+	</update> -->
+	<update id="updateEventStatus" parameterType="integer">
+		UPDATE event_list SET
+			event_status=0
+		WHERE event_num=#{event_num}
+	</update>
+	<update id="updateWinType" parameterType="integer">
+		UPDATE entry_list SET
+			win_type=1,
+			win_date=SYSDATE
+		WHERE event_num=#{event_num} AND mem_num=#{mem_num}
+	</update>
+	<!-- 응모이벤트 참여 했는지 알기 위해 -->
+	<select id="selectRentryEvent" parameterType="integer" resultType="Entry_listVO">
+		SELECT
+			*
+		FROM rentry_list
+		WHERE mem_num=#{mem_num}
+	</select>
+	<!-- 응모이벤트 참여 했는지 알기 위해 -->
+	<select id="selectEntryEvent" parameterType="integer" resultType="Entry_listVO">
+		SELECT
+			*
+		FROM entry_list
+		WHERE event_num=#{event_num} AND mem_num=#{mem_num}
+	</select>
+	<select id="selectWin" parameterType="integer" resultType="Entry_listVO">
+		SELECT
+				*
+		FROM entry_list						
+		JOIN member USING(mem_num)
+        JOIN event_list USING(event_num)
+		WHERE win_type=#{win_type}
+	</select>
+</mapper>
+ 
+
+
+
+
+
